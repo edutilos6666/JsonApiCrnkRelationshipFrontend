@@ -7,6 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('hibernate-workers');
+  this.route('workers');
+  this.route('hibernate-university-students');
+  this.route('hibernate-student', {path: '/:student_id'});
 });
 
 export default Router;

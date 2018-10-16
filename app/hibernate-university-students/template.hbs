@@ -1,0 +1,6 @@
+{{#each model.hibernateUniversities as |university|}}
+{{print-hibernate-university university=university}}
+{{#each university.hibernateStudents as |student i|}}
+{{print-hibernate-student student=student index=i}}
+{{/each}}
+{{/each}}

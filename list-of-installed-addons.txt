@@ -1,0 +1,2 @@
+ember install ember-component-css
+ember install ember-cli-sass
