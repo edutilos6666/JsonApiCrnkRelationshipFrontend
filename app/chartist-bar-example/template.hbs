@@ -1,0 +1,8 @@
+{{log model.chartData}}
+{{chartist-chart ratio="ct-perfect-fifth" type="bar" options=chartOptions data=model.chartData updateOnData=true}}
+<br><br><br>
+{{chartist-chart ratio="st-golden-section" data=model.chartData}}
+
+
+<br><br><br>
+{{chartist-chart ratio="st-golden-section" data=scatterData options=scatterOptions responsiveOptions=scatterResponsiveOptions}}
