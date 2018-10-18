@@ -1,0 +1,18 @@
+<td>{{worker.id}}</td>
+<td>{{worker.fname}}</td>
+<td>{{worker.lname}}</td>
+<td>{{worker.country}}</td>
+<td>{{worker.city}}</td>
+<td>{{worker.plz}}</td>
+<td>{{worker.email}}</td>
+<td>{{worker.company}}</td>
+<td>{{worker.age}}</td>
+<td>{{worker.wage}}</td>
+<td>{{worker.active}}</td>
+<td>
+    <uL>
+    {{#each worker.activities as |act|}}
+        <li>{{act}}</li>
+    {{/each}}
+    </uL>
+</td>
