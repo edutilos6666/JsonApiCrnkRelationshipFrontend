@@ -1,0 +1,134 @@
+<div class="jumbotron text-center">
+    <h1>example4.hbs</h1>
+    <p>Heading example</p>
+</div>
+
+<div class="container">
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+
+    <h1 class="display-1">Display 1</h1>
+    <h1 class="display-2">Display 2</h1>
+    <h1 class="display-3">Display 3</h1>
+    <h1 class="display-4">Display 4</h1>
+    <p class="display-1">Display 1(with p)</p>
+
+    <h1>Heading 1 <small>secondary text</small></h1>
+    <h2>Heading 2 <small>secondary text</small></h2>
+    <h3>Heading 3 <small>secondary text</small></h3>
+    <h4>Heading 4 <small>secondary text</small></h4>
+    <h5>Heading 5 <small>secondary text</small></h5>
+    <h6>Heading 6 <small>secondary text</small></h6>
+
+    <p>Mark <mark>example</mark></p>
+    <p>The <abbr title="World Health Organization">WHO</abbr> sucks big time</p>
+
+    <h1>Blockquote</h1>
+    <blockquote class="blockquote">
+        <p>foo bar bim pako deko ceko messi leo ronaldo</p>
+        <footer class="blockquote-footer">From WWF's website</footer>
+    </blockquote>
+
+    <h1>Description Lists(dl)</h1>
+    <dl>
+        <dt>Tea</dt>
+        <dd>black,yellow or green hot drink</dd>
+        <dt>Coffee</dt>
+        <dd>black hot drink</dd>
+        <dt>Milk</dt>
+        <dd>white cold drink</dd>
+    </dl>
+    <h1>code example</h1>
+    <pre>
+        <code>
+            public class Runner {
+                public static void main(String[] args) {
+                    System.out.println("bootstrap");
+                }
+            }
+        </code>
+    </pre>
+    <p>Some html tags: <code>span</code>, <code>tr</code>, <code>table</code></p>
+
+    <h1>Keyboard Inputs</h1>
+    <p>Save file: <kbd>Ctrl+s</kbd></p>
+    <p>Open file: <kbd>Ctrl+o</kbd></p>
+    <p>Close file: <kbd>Ctrl+w</kbd></p>
+    <p>Delete file: <kbd>Ctrl+delete</kbd></p>
+
+    <h1>Other Typography Classes</h1>
+    <p class="font-weight-bold">font-weight-bold</p>
+    <p class="font-italic">font-italic</p>
+    <p class="font-weight-light">font-weigt-light</p>
+    <p class="font-weight-normal">font-weight-normal</p>
+    <p class="lead">lead</p>
+    <p class="small">small</p>
+    <p class="text-left">text-left</p>
+    <p class="text-*-left">text-*-left</p>
+    <p class="text-center">text-center</p>
+    <p class="text-*-center">text-*-center</p>
+    <p class="text-right">text-right</p>
+    <p class="text-*-right">text-*-right</p>
+    <p class="text-justify">text-justify</p>
+    <p class="text-monospace">text-monospace</p>
+    <p class="text-nowrap">text-nowrap</p>
+    <p class="text-lowercase">text-lowercase</p>
+    <p class="text-uppercase">text-uppercase</p>
+    <p class="text-capitalize">text-capitalize</p>
+    <p class="initialism">initialism</p>
+    <p>The <abbr title="World Health Organization" class="initialism">WHO</abbr> sucks big time</p>
+    <ul class="list-unstyled">
+        <li>foo</li>
+        <li>bar</li>
+        <li>bim</li>
+    </ul>
+
+    <ol class="list-unstyled">
+        <li>foo</li>
+        <li>bar</li>
+        <li>bim</li>
+    </ol>
+
+    <ul class="list-inline">
+        <li class="list-inline-item">foo</li>
+        <li class="list-inline-item">bar</li>
+        <li class="list-inline-item">bim</li>
+    </ul>
+
+
+    <pre class="pre-scrollable">
+        import Ember from '@ember';
+        import { get, set } from '@ember/object';
+        import Component from '@ember/component';
+         
+        const Person = Ember.Object.extend({
+            id: null,
+            name: null,
+            printProps() {
+                console.log(`Person(${this.id},${this.name})`);
+            }
+        });
+        export default Component.extend({
+            tagName: 'table',
+            init() {
+                let p1, p2;
+                p1 = Person.create({
+                    id: 1,
+                    name: "foo"
+                });
+                p2 = Person.create({
+                    id: 2,
+                    name: "bar"
+                });
+                p1.printProps();
+                p2.printProps();
+            }
+        });
+    </pre>
+
+
+</div>
