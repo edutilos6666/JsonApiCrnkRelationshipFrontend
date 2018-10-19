@@ -27,7 +27,9 @@ Router.map(function() {
     this.route('example10');
     this.route('example11');
   });
-  this.route('simple-workers');
+  this.route('simple-workers', function() {
+    this.route('create');
+  });
 });
 
 export default Router;

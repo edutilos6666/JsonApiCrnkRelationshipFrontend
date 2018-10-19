@@ -1,0 +1,83 @@
+<div class="container">
+    hasErrors = {{hasErrors}}
+<form class="form-horizontal">
+    <p class="display-3">Create New Worker Form</p>
+    <div class="form-group">
+        <label for="fieldFname">Fname:</label>
+        <input placeholder="Enter fname" type="text" id="fieldFname" class="form-control" value={{model.fname}} oninput={{action (mut model.fname) value="target.value"}}>
+        <span class="text-danger">{{fnameError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldLname">Lname:</label>
+        <input placeholder="Enter lname" type="text" id="fieldLname" class="form-control" value={{model.lname}} oninput={{action (mut model.lname) value="target.value"}}>
+        <span class="text-danger">{{lnameError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldCountry">Country:</label>
+        <input placeholder="Enter country" type="text" id="fieldCountry" class="form-control" value={{model.country}} oninput={{action (mut model.country) value="target.value"}}>
+        <span class="text-danger">{{countryError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldCity">City:</label>
+        <input placeholder="Enter city" type="text" id="fieldCity" class="form-control" value={{model.city}} oninput={{action (mut model.city) value="target.value"}}>
+        <span class="text-danger">{{cityError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldPlz">PLZ:</label>
+        <input placeholder="Enter plz" type="text" id="fieldPlz" class="form-control" value={{model.plz}} oninput={{action (mut model.plz) value="target.value"}}>
+        <span class="text-danger">{{plzError}}</span>
+    </div>    
+    <div class="form-group">
+        <label for="fieldEmail">Email:</label>
+        <input placeholder="Enter email" type="email" id="fieldEmail" class="form-control" value={{model.email}} oninput={{action (mut model.email) value="target.value"}}>
+        <span class="text-danger">{{emailError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldCompany">Company:</label>
+        <input placeholder="Enter company" type="text" id="fieldCompany" class="form-control" value={{model.company}} oninput={{action (mut model.company) value="target.value"}}>
+        <span class="text-danger">{{companyError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldAge">Age:</label>
+        <input placeholder="Enter age" type="text" id="fieldAge" class="form-control" value={{model.age}} oninput={{action (mut model.age) value="target.value"}}>
+        <span class="text-danger">{{ageError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldWage">Wage:</label>
+        <input placeholder="Enter wage" type="text" id="fieldWage" class="form-control" value={{model.wage}} oninput={{action (mut model.wage) value="target.value"}}>
+        <span class="text-danger">{{wageError}}</span>
+    </div>
+    <div class="form-group">
+        <label for="fieldActive">Active:</label>
+        <input placeholder="Enter active" type="text" id="fieldActive" class="form-control" value={{model.active}} oninput={{action (mut model.active) value="target.value"}}>
+        <span class="text-danger">{{activeError}}</span>
+    </div>
+   <div class="form-group">
+        <label for="fieldActivities">Activities:</label>
+       {{#power-select-multiple
+            id="fieldActivities"
+            options=activityList
+            selected=model.activities
+            placeholder="Select some activities..."
+            onchange=(action (mut model.activities))
+            as |activities|
+        }}
+            {{activities}}
+        {{/power-select-multiple}}
+        <span class="text-danger">{{activitiesError}}</span>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm">
+                <button {{action "createWorker"}} class="btn btn-lg btn-primary" disabled={{hasErrors}}>Create</button>
+            </div>
+            <div class="col-sm">
+                <button {{action "clearFields"}} class="btn btn-lg btn-warning" disabled={{areFieldsEmpty}}>Clear</button>
+            </div>
+            <div class="col-sm">
+                <button {{action "cancelCreateWorker"}} class="btn btn-lg btn-danger">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>

@@ -17,8 +17,17 @@
         </tr>
     </thead>
     <tbody>
-        {{#each workers as |worker|}}
+        {{#each filteredWorkers as |worker|}}
         {{simple-worker-component/one worker=worker}}
         {{/each}}
     </tbody>
 </table>
+<div class="form-group">
+  <label for="selectFilter">Enter value for filter:</label>
+  <select class="form-control" id="selectFilter" onchange={{action "updateValue" value="target.value"}}>
+      {{#each labels as |label|}}
+      <option value="{{label}}">{{label}}</option>
+      {{/each}}
+  </select>
+   <input class="form-control" value={{filterValue}} oninput={{action (mut filterValue) value="target.value"}}>
+</div>
