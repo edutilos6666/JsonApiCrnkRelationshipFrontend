@@ -8,48 +8,48 @@ import validateNumber from 'ember-validators/number';  //for numbers
 
 export default Controller.extend({
     activityList: null,
-    fnameError: Ember.computed('model.fname', function(){
-        const fname = get(this, 'model.fname');
+    fnameError: Ember.computed('fname', function(){
+        const fname = get(this, 'fname');
         const options = {
             min: 3,
             max: 10
         };
         return this.getValidationResult(fname, options);
     }),
-    lnameError: Ember.computed('model.lname', function() {
-        const lname = get(this, 'model.lname');
+    lnameError: Ember.computed('lname', function() {
+        const lname = get(this, 'lname');
         const options = {
             min: 3, 
             max: 10
         };
         return this.getValidationResult(lname, options);
     }),
-    countryError: Ember.computed('model.country', function() {
-        const country = get(this, 'model.country');
+    countryError: Ember.computed('country', function() {
+        const country = get(this, 'country');
         const options = {
             min: 3,
             max: 10
         };
         return this.getValidationResult(country, options);
     }),
-    cityError: Ember.computed('model.city', function() {
-        const city = get(this, 'model.city');
+    cityError: Ember.computed('city', function() {
+        const city = get(this, 'city');
         const options = {
             min: 3,
             max: 10
         };
         return this.getValidationResult(city, options);
     }),
-    plzError: Ember.computed('model.plz', function() {
-        const plz = get(this, 'model.plz');
+    plzError: Ember.computed('plz', function() {
+        const plz = get(this, 'plz');
         const options = {
             min: 5,
             max: 10
         };
         return this.getValidationResult(plz, options);
     }),
-    emailError: Ember.computed('model.email', function() {
-        const email = get(this, 'model.email');
+    emailError: Ember.computed('email', function() {
+        const email = get(this, 'email');
         const options = {
             allowBlank: false,
             type: 'email'
@@ -57,8 +57,8 @@ export default Controller.extend({
         const result = validateFormat(email, options);
         return result=== true?"": get(result, "type");
     }),
-    companyError: Ember.computed('model.company', function() {
-        const company = get(this, 'model.company');
+    companyError: Ember.computed('company', function() {
+        const company = get(this, 'company');
         let options = {
             min: 3,
             max: 10
@@ -77,8 +77,8 @@ export default Controller.extend({
         }
         return ret;
     }),
-    ageError: Ember.computed('model.age', function() {
-        const age = get(this, 'model.age');
+    ageError: Ember.computed('age', function() {
+        const age = get(this, 'age');
         const options = {
             allowString: true,
             integer: true,
@@ -89,8 +89,8 @@ export default Controller.extend({
         const result = validateNumber(age, options);
         return result === true?"": get(result, 'type');
     }),
-    wageError: Ember.computed('model.wage', function() {
-        const wage = get(this, 'model.wage');
+    wageError: Ember.computed('wage', function() {
+        const wage = get(this, 'wage');
         const options = {
             allowString: true,
             positive: true,
@@ -100,20 +100,20 @@ export default Controller.extend({
         const result = validateNumber(wage, options);
         return result === true?"": get(result, 'type');
     }),
-    activeError: Ember.computed('model.active', function() {
-        const active = get(this, 'model.active');
+    activeError: Ember.computed('active', function() {
+        const active = get(this, 'active');
         if(active === undefined) return "must be boolean";
         return  active.toLowerCase()==="true"? "": "must be boolean";
     }),
-    activitiesError: Ember.computed('model.activities', function() {
-        const activities = get(this, 'model.activities');
+    activitiesError: Ember.computed('activities', function() {
+        const activities = get(this, 'activities');
         // debugger;
         if(activities === undefined) return "select at least one activity";
         return activities.length === 0? "select at least one activity" : "";
     }),
-    hasErrors: Ember.computed('fnameError','model.lname', 'model.country',
-                              'model.city', 'model.plz', 'model.email', 
-                              'model.age', 'model.wage', 'model.active', 'model.activities', function() {
+    hasErrors: Ember.computed('fnameError','lname', 'country',
+                              'city', 'plz', 'email', 
+                              'age', 'wage', 'active', 'activities', function() {
         const fnameError = get(this, 'fnameError'); 
         const lnameError = get(this, 'lnameError');
         const countryError = get(this, 'countryError');
@@ -129,19 +129,19 @@ export default Controller.extend({
           ageError === "" && wageError === "" && activeError === "" && activitiesError === "") return null;
         return true;
     }),
-    areFieldsEmpty: Ember.computed('model.fname','model.lname', 'model.country',
-    'model.city', 'model.plz', 'model.email', 
-    'model.age', 'model.wage', 'model.active', 'model.activities', function() {
-        const fname = get(this, 'model.fname');
-        const lname = get(this, 'model.lname');
-        const country = get(this, 'model.country');
-        const city = get(this, 'model.city');
-        const plz = get(this, 'model.plz');
-        const email = get(this, 'model.email');
-        const age = get(this, 'model.age');
-        const wage = get(this, 'model.wage');
-        const active = get(this, 'model.active');
-        const activities = get(this, 'model.activities');
+    areFieldsEmpty: Ember.computed('fname','lname', 'country',
+    'city', 'plz', 'email', 
+    'age', 'wage', 'active', 'activities', function() {
+        const fname = get(this, 'fname');
+        const lname = get(this, 'lname');
+        const country = get(this, 'country');
+        const city = get(this, 'city');
+        const plz = get(this, 'plz');
+        const email = get(this, 'email');
+        const age = get(this, 'age');
+        const wage = get(this, 'wage');
+        const active = get(this, 'active');
+        const activities = get(this, 'activities');
         if(fname === "" && lname === "" && country === "" &&
            city === "" && plz === "" && email === "" && 
            age === "" && wage === "" && active === "" && (activities === undefined || activities.length === 0)) {
@@ -158,23 +158,37 @@ export default Controller.extend({
         set(this, 'activityList', ["Reading", "Writing", "Speaking", "Listening", "Swimming"]);
     }, 
     clearFields() {
-        set(this, 'model.fname', '');
-        set(this, 'model.lname', '');
-        set(this, 'model.country', '');
-        set(this, 'model.city', '');
-        set(this, 'model.plz', '');
-        set(this, 'model.email', '');
-        set(this, 'model.company', '');
-        set(this, 'model.age', '');
-        set(this, 'model.wage', '');
-        set(this, 'model.active', '');
-        set(this, 'model.activities', []);
+        set(this, 'fname', '');
+        set(this, 'lname', '');
+        set(this, 'country', '');
+        set(this, 'city', '');
+        set(this, 'plz', '');
+        set(this, 'email', '');
+        set(this, 'company', '');
+        set(this, 'age', '');
+        set(this, 'wage', '');
+        set(this, 'active', '');
+        set(this, 'activities', []);
     }, 
     actions: {
         async createWorker() {
             await get(this, 'model').save();
             // const model = this.modelFor('simple-workers.create');
-            // await model.save();
+            // await save();
+            const simpleWorker = await this.store.createRecord('simple-worker', {
+                fname: get(this, 'fname'),
+                lname: get(this, 'lname'),
+                country: get(this, 'country'),
+                city: get(this, 'city'),
+                plz: get(this, 'plz'),
+                email: get(this, 'email'),
+                company: get(this, 'company'),
+                age: get(this, 'age'),
+                wage: get(this, 'wage'),
+                active: get(this, 'active'),
+                activities: get(this, 'activities')
+            });
+            await simpleWorker.save();
             this.transitionToRoute('simple-workers');
         }, 
         clearFields() {

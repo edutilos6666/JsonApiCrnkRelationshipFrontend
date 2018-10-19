@@ -1,2 +1,4 @@
 ember install ember-component-css
 ember install ember-cli-sass
+ember install ember-cli-content-security-policy  //for public/crossdomain.xml
+ember install ember-bootstrap

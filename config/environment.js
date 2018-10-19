@@ -20,6 +20,9 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      usingCors: false,
+		  corsWithCreds: false,
+		  apiURL: null
     },
     contentSecurityPolicy: {
       'connect-src': "'self' http://localhost:9090"
@@ -32,6 +35,10 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.APP.usingCors = true;
+		ENV.APP.corsWithCreds = false;
+		ENV.APP.apiURL = 'http://localhost:9090'
   }
 
   if (environment === 'test') {
