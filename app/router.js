@@ -29,6 +29,8 @@ Router.map(function() {
   });
   this.route('simple-workers', function() {
     this.route('create');
+    this.route('details', {path: '/:details_id'});
+    this.route('update', {path: '/:update_id'});
   });
 });
 

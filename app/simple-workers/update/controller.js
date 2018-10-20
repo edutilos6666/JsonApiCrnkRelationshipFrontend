@@ -1,13 +1,37 @@
 import Controller from '@ember/controller';
-import { get, set } from '@ember/object';
+import { get, set, setProperties, getProperties } from '@ember/object';
 import Ember from 'ember';
-import Messages from 'ember-validators/messages';
 import validateFormat from 'ember-validators/format';  //for email, regex 
 import validateLength from 'ember-validators/length'; //for string length 
 import validateNumber from 'ember-validators/number';  //for numbers 
+import { compare } from '@ember/utils';
 
 export default Controller.extend({
-    activityList: null,
+    oldWorker: null,
+    actions: {
+        async updateWorker() {
+            await get(this, 'model').save();
+            this.transitionToRoute('simple-workers');
+        },
+        resetWorker() {;
+            setProperties(get(this, 'model'), {
+                fname: get(this, 'oldWorker.fname'),
+                lname: get(this, 'oldWorker.lname'),
+                country: get(this, 'oldWorker.country'),
+                city: get(this, 'oldWorker.city'),
+                plz: get(this, 'oldWorker.plz'),
+                email: get(this, 'oldWorker.email'),
+                company: get(this, 'oldWorker.company'),
+                age: get(this, 'oldWorker.age'),
+                wage: get(this, 'oldWorker.wage'),
+                active: get(this, 'oldWorker.active'),
+                activities: get(this, 'oldWorker.activities')
+            });
+        },
+        cancelUpdateWorker() {
+            this.transitionToRoute('simple-workers');
+        }
+    },
     fnameError: Ember.computed('model.fname', function(){
         const fname = get(this, 'model.fname');
         const options = {
@@ -115,7 +139,8 @@ export default Controller.extend({
     }),
     hasErrors: Ember.computed('fnameError','model.lname', 'model.country',
                               'model.city', 'model.plz', 'model.email', 'model.company',
-                              'model.age', 'model.wage', 'model.active', 'model.activities', function() {
+                              'model.age', 'model.wage', 'model.active', 'model.activities',
+                              'areFieldsNotModified', function() {
         const fnameError = get(this, 'fnameError'); 
         const lnameError = get(this, 'lnameError');
         const countryError = get(this, 'countryError');
@@ -127,27 +152,46 @@ export default Controller.extend({
         const wageError = get(this, 'wageError');
         const activeError = get(this, 'activeError');
         const activitiesError = get(this, 'activitiesError');
+        const areFieldsNotModified = get(this, 'areFieldsNotModified');
         if(fnameError === "" && lnameError === "" && countryError === "" && 
           cityError === "" && plzError === "" && emailError === "" && companyError === "" &&
-          ageError === "" && wageError === "" && activeError === "" && activitiesError === "") return null;
+          ageError === "" && wageError === "" && activeError === "" && activitiesError === "" &&
+          areFieldsNotModified !== true) return null;
         return true;
     }),
-    areFieldsEmpty: Ember.computed('model.fname','model.lname', 'model.country',
-    'model.city', 'model.plz', 'model.email', 
+    areFieldsNotModified: Ember.computed('model.fname','model.lname', 'model.country',
+    'model.city', 'model.plz', 'model.email', 'model.company',
     'model.age', 'model.wage', 'model.active', 'model.activities', function() {
+        // console.table([getProperties(get(this, 'model'), 'fname', 'lname',
+        // 'country', 'city', 'plz', 'email', 'company', 'age', 'wage', 'active', 
+        // 'activities'), get(this, 'oldWorker')]);
+
         const fname = get(this, 'model.fname');
         const lname = get(this, 'model.lname');
         const country = get(this, 'model.country');
         const city = get(this, 'model.city');
         const plz = get(this, 'model.plz');
         const email = get(this, 'model.email');
-        const age = get(this, 'model.age');
-        const wage = get(this, 'model.wage');
-        const active = get(this, 'model.active');
+        const company = get(this, 'model.company');
+        const age = get(this, 'model.age')+'';
+        const wage = get(this, 'model.wage')+'';
+        const active = get(this, 'model.active')+'';
         const activities = get(this, 'model.activities');
-        if(fname === "" && lname === "" && country === "" &&
-           city === "" && plz === "" && email === "" && 
-           age === "" && wage === "" && active === "" && (activities === undefined || activities.length === 0)) {
+
+        const fnameOld = get(this, 'oldWorker.fname');
+        const lnameOld = get(this, 'oldWorker.lname');
+        const countryOld = get(this, 'oldWorker.country');
+        const cityOld = get(this, 'oldWorker.city');
+        const plzOld = get(this, 'oldWorker.plz');
+        const emailOld = get(this, 'oldWorker.email');
+        const companyOld = get(this, 'oldWorker.company');
+        const ageOld = get(this, 'oldWorker.age')+'';
+        const wageOld = get(this, 'oldWorker.wage')+'';
+        const activeOld = get(this, 'oldWorker.active')+'';
+        const activitiesOld = get(this, 'oldWorker.activities');
+        if(fname === fnameOld && lname === lnameOld && country === countryOld &&
+           city === cityOld && plz === plzOld && email === emailOld && company === companyOld &&
+           age === ageOld && wage === wageOld && active === activeOld && compare(activities, activitiesOld) === 0) {
                return true;   
         }
         return null;
@@ -157,35 +201,4 @@ export default Controller.extend({
         return result=== true?"": get(result, "type");
 
     },
-    init() {
-        set(this, 'activityList', ["Reading", "Writing", "Speaking", "Listening", "Swimming"]);
-    }, 
-    clearFields() {
-        set(this, 'model.fname', '');
-        set(this, 'model.lname', '');
-        set(this, 'model.country', '');
-        set(this, 'model.city', '');
-        set(this, 'model.plz', '');
-        set(this, 'model.email', '');
-        set(this, 'model.company', '');
-        set(this, 'model.age', '');
-        set(this, 'model.wage', '');
-        set(this, 'model.active', '');
-        set(this, 'model.activities', []);
-    }, 
-    actions: {
-        async createWorker() {
-            await get(this, 'model').save();
-            // const model = this.modelFor('simple-workers.create');
-            // await model.save();
-            this.transitionToRoute('simple-workers');
-        }, 
-        clearFields() {
-            this.clearFields();
-        }, 
-        cancelCreateWorker() {
-            this.clearFields();
-            this.transitionToRoute('simple-workers');
-        }
-    }
 });

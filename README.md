@@ -3,6 +3,11 @@
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
+
+## Disable cors in chrome 
+
+google-chrome  --disable-web-security --user-data-dir="[some directory here]"
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.

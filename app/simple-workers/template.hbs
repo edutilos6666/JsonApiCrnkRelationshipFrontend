@@ -1,3 +1,7 @@
-{{simple-worker-component workers=model title=title}}
+{{simple-worker-component workers=model title=title
+ detailsAction=(action 'detailsAction')
+ updateAction=(action 'updateAction')
+ deleteAction=(action 'deleteAction')
+}}
 {{#link-to "simple-workers.create"}}Create new SimpleWorker{{/link-to}}
 {{outlet}}

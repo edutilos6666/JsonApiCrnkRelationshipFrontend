@@ -2,23 +2,30 @@
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
-            <th>id</th>
-            <th>fname</th>
-            <th>lname</th>
-            <th>country</th>
-            <th>city</th>
-            <th>plz</th>
-            <th>email</th>
-            <th>company</th>
-            <th>age</th>
-            <th>wage</th>
-            <th>active</th>
-            <th>activities</th>
+            <th>Id</th>
+            <th>Fname</th>
+            <th>Lname</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Plz</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Age</th>
+            <th>Wage</th>
+            <th>Active</th>
+            <th>Activities</th>
+            <th>Details</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
         {{#each filteredWorkers as |worker|}}
-        {{simple-worker-component/one worker=worker}}
+        {{simple-worker-component/one worker=worker
+        detailsAction = detailsAction 
+        updateAction = updateAction 
+        deleteAction = deleteAction
+        }}
         {{/each}}
     </tbody>
 </table>
