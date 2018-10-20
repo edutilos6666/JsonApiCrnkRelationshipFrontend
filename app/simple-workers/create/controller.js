@@ -100,10 +100,12 @@ export default Controller.extend({
         const result = validateNumber(wage, options);
         return result === true?"": get(result, 'type');
     }),
-    activeError: Ember.computed('active', function() {
-        const active = get(this, 'active');
+    activeError: Ember.computed('model.active', function() {
+        const active = `${get(this, 'model.active')}`;
         if(active === undefined) return "must be boolean";
-        return  active.toLowerCase()==="true"? "": "must be boolean";
+        if(active.toLowerCase()==="true" || active.toLowerCase() === "false")
+          return  "";
+        else return  "must be boolean";
     }),
     activitiesError: Ember.computed('activities', function() {
         const activities = get(this, 'activities');
@@ -111,21 +113,22 @@ export default Controller.extend({
         if(activities === undefined) return "select at least one activity";
         return activities.length === 0? "select at least one activity" : "";
     }),
-    hasErrors: Ember.computed('fnameError','lname', 'country',
-                              'city', 'plz', 'email', 
-                              'age', 'wage', 'active', 'activities', function() {
+    hasErrors: Ember.computed('fnameError','model.lname', 'model.country',
+                              'model.city', 'model.plz', 'model.email', 'model.company',
+                              'model.age', 'model.wage', 'model.active', 'model.activities', function() {
         const fnameError = get(this, 'fnameError'); 
         const lnameError = get(this, 'lnameError');
         const countryError = get(this, 'countryError');
         const cityError = get(this, 'cityError');
         const plzError = get(this, 'plzError');
         const emailError = get(this, 'emailError');
+        const companyError = get(this, 'companyError');
         const ageError = get(this, 'ageError');
         const wageError = get(this, 'wageError');
         const activeError = get(this, 'activeError');
         const activitiesError = get(this, 'activitiesError');
         if(fnameError === "" && lnameError === "" && countryError === "" && 
-          cityError === "" && plzError === "" && emailError === "" &&
+          cityError === "" && plzError === "" && emailError === "" && companyError === "" &&
           ageError === "" && wageError === "" && activeError === "" && activitiesError === "") return null;
         return true;
     }),
